@@ -7,15 +7,6 @@
     display: flex;
 }
 
-#menu {
-    display: flex;
-    border: 1px solid rgba(0, 0, 0, 0.71);
-    flex-direction: column;
-    justify-content: space-between;
-    width: 200px;
-    height: 100vh;
-}
-
 #bottomMenu {
     display: flex;
     flex-direction: column;
@@ -24,16 +15,11 @@
 
 #options {
     display: flex;
-    justify-content: space-between;
-    width: 85vw;
+    justify-content: space-around;
+    width: 100vw;
     /* border: 1px solid gray; */
 
 }
-
-#ThemeAndLang {
-    display: flex;
-}
-
 #connection-status {
     display: flex;
     align-self: center;
@@ -42,6 +28,21 @@
 
 #connection-status h4 {
     margin: 0px 7px;
+}
+#args{
+    margin: 3px;
+    padding: 8px;
+    width: 230px;
+}
+#asider{
+    cursor: pointer;
+    padding: 5px;
+}
+#asider:hover{
+    transition: all 0.3s;
+    border-radius: 50%;
+    background-color: rgba(17, 17, 186, 0.797);
+    color: white;
 }
 @media only screen and (max-width:850px) {
     #menu {
@@ -69,10 +70,16 @@
         display: none;
     }
     #console{
+        font-size: xx-small;
         margin: 0px;
         padding: 5px;
     }
     #coderunner{
         padding: 5px;
+    }
+    #args{
+        /* width: 50px; */
+        padding: 2px;
+        margin: 0px;
     }
 }

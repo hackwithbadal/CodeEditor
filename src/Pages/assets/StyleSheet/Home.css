@@ -33,7 +33,7 @@ header {
     font-size: 20px;
 }
 
-input {
+#enterroomid {
     height: 10px;
     width: 250px;
     border-radius: 5px;

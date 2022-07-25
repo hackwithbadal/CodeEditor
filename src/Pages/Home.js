@@ -5,6 +5,7 @@ import { v4 as uuidv4 } from 'uuid'
 import toast from 'react-hot-toast'
 import logo from './assets/media/logo.png'
 import './assets/StyleSheet/Home.css'
+// import Btn from './Compoents/Btn';
 
 function Home() {
   const navigate = useNavigate();
@@ -40,9 +41,12 @@ function Home() {
   // const [b, sb] = useState('');
   return (
     <div id='rootDiv'>
+      {/* <div>
+        <Btn ontextChange={(e) => sb(e)} />
+      </div> */}
       <header>
         <div>
-          <img src={logo} alt="logo" height='100px' width='300px' margin='10px'/>
+          <img src={logo} alt="logo" height='100px' width='300px' margin='10px' />
         </div>
         <div>
           <button id='loginBtn'>Login</button>
@@ -54,7 +58,7 @@ function Home() {
         <br />
         <div id='btngrp'>
           <button id='NewRoom' onClick={CreateNewRoom}><AiFillCode />NEW ROOM</button>
-          <input type="text" placeholder='ENTER ROOM CODE...' onKeyUp={HandleEnter} onChange={(e) => setRoomID(e.target.value)} style={{ color: "black", fontSize: "15px" }} />
+          <input id='enterroomid' type="text" placeholder='ENTER ROOM CODE...' onKeyUp={HandleEnter} onChange={(e) => setRoomID(e.target.value)} style={{ color: "black", fontSize: "15px" }} />
         </div>
       </div>
       <footer style={{ margin: "20px" }}>

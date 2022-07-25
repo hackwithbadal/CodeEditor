@@ -4,7 +4,7 @@ function Btn({ onpress, ontextChange }) {
     return (
         <div>
             <input type="text" onChange={e => ontextChange(e.target.value)} />
-            <button onClick={onpress}>submit</button>
+            {/* <button onClick={onpress}>submit</button> */}
         </div>
     )
 }

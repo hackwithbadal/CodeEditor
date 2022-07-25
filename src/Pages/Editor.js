@@ -1,6 +1,6 @@
 import React, { useState, useCallback } from 'react'
 import { Button, Select, ActionIcon, Drawer, Group } from '@mantine/core';
-import { Wifi } from 'tabler-icons-react';
+import { Wifi, Home } from 'tabler-icons-react';
 import './assets/StyleSheet/Editor.css';
 import CodeMirror from '@uiw/react-codemirror';
 import { python } from '@codemirror/lang-python'
@@ -11,6 +11,7 @@ import { toast } from 'react-hot-toast'
 import { Helmet } from 'react-helmet';
 
 function Editor() {
+  const [show, setShow] = useState(false);
   const [opened, setOpened] = useState(false);
   const [code, setCode] = useState("print('hello world!')");
   const [mode, setMode] = useState('DARK');
@@ -23,9 +24,9 @@ function Editor() {
 
   const SendCode = () => {
     axios
-      .post(`http://localhost:5000/${language}`, { code })
+      .post(`${process.env.API_URL}/${language}`, { code })
       .then((res) => {
-        const result = res.data.message;
+        const result = res.data.output;
         // setResponce(responce => [...responce, <br />, result, <br />]);
         setResponce(result);
         toast(`Output: ${result}`,
@@ -47,9 +48,6 @@ function Editor() {
         <title>DevDooR | Editor</title>
       </Helmet>
       <div id='MainContainer'>
-        <div>
-          <Asider />
-        </div>
         <div id="editorWrapper">
           <div id="options">
             <div id='connection-status'>
@@ -58,24 +56,25 @@ function Editor() {
               </ActionIcon>
               <h4>Connected</h4>
             </div>
+            <Select defaultValue={language}
+              onChange={setLanguage}
+              data={[
+                { value: 'python', label: 'Python 3.6' },
+                { value: 'javascript', label: 'Javacript ES6' },
+                { value: 'C', label: 'C' },
+                { value: 'C++', label: 'C++' },
+              ]}
+            />
+            <Select
+              defaultValue={mode}
+              onChange={setMode}
+              data={[
+                { value: 'DARK', label: 'DARK' },
+                { value: 'LIGHT', label: 'LIGHT' },
+              ]}
+            />
             <div id="ThemeAndLang">
-              <Select defaultValue={language}
-                onChange={setLanguage}
-                data={[
-                  { value: 'python', label: 'Python 3.6' },
-                  { value: 'javascript', label: 'Javacript ES6' },
-                  { value: 'C', label: 'C' },
-                  { value: 'C++', label: 'C++' },
-                ]}
-              />
-              <Select
-                defaultValue={mode}
-                onChange={setMode}
-                data={[
-                  { value: 'DARK', label: 'DARK' },
-                  { value: 'LIGHT', label: 'LIGHT' },
-                ]}
-              />
+              <input type="text" name="arg" id="args" placeholder='Args...' />
               <Button id='coderunner' variant="gradient" size='md' radius='xs' uppercase onClick={SendCode} color="indigo">
                 Run
               </Button>
@@ -83,7 +82,7 @@ function Editor() {
             <div>
               <Drawer
                 opened={opened}
-                position="right"
+                position="bottom"
                 onClose={() => setOpened(false)}
                 title="Console"
                 padding="xl"
@@ -99,7 +98,25 @@ function Editor() {
               </Drawer>
 
               <Group position="center">
-                <Button variant='subtle' id='console' onClick={() => setOpened(true)}>Console</Button>
+                <Button variant='subtle' id='console' onClick={() => setOpened(true)}>CONSOLE</Button>
+              </Group>
+            </div>
+            <div>
+              <Drawer
+                opened={show}
+                position="right"
+                onClose={() => setShow(false)}
+                // title="Console"
+                padding="xl"
+                size="40%"
+                overlayColor='black'
+                lockScroll={false}
+              >
+                <Asider />
+              </Drawer>
+
+              <Group position="center">
+                <Button variant='subtle' id='asider' onClick={() => setShow(true)}><Home /></Button>
               </Group>
             </div>
           </div>
